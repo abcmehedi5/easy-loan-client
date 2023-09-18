@@ -1,22 +1,36 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 const LoanRequest = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
   const todayDate = new Date();
   const formattedDate = todayDate.toLocaleDateString("en-GB");
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    // create loan data object
     const loanRequest = {
-      loanAmount:  parseInt(data.loanAmount),
+      loanAmount: parseInt(data.loanAmount),
       data: formattedDate,
-      email:'abcmehedi5@gmail.com',
-      status:"pending"
+      email: "abcmehedi5@gmail.com",
+      status: "pending",
     };
-    console.log(loanRequest);
+
+    // post loan data to server side
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/loans/loan",
+        loanRequest
+      );
+      alert(res.data.message);
+      reset(); // reset from
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
