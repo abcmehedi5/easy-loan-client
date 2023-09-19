@@ -15,7 +15,7 @@ const LoanRequest = () => {
     // create loan data object
     const loanRequest = {
       loanAmount: parseInt(data.loanAmount),
-      data: formattedDate,
+      date: formattedDate,
       email: "abcmehedi5@gmail.com",
       status: "pending",
     };

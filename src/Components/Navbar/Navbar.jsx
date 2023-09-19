@@ -48,6 +48,9 @@ const Navbar = () => {
             <Link to="/loan-request">Loan Request</Link>
           </li>
           <li>
+            <Link to="/my-loans">My Loans</Link>
+          </li>
+          <li>
             <Link>Service</Link>
           </li>
           <li>
