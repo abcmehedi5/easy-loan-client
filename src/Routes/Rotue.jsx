@@ -7,6 +7,7 @@ import MyLoans from "../Pages/MyLoans/MyLoans";
 import LoanScheduleds from "../Pages/LoanScheduleds/LoanScheduleds";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AdminDashboadLayout from "../Layouts/AdminDashboadLayout";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,19 @@ const router = createBrowserRouter([
       {
         path: "/scheduled/:id",
         element: <LoanScheduleds></LoanScheduleds>,
+      },
+    ],
+  },
+
+  // admin route------------------
+
+  {
+    path: "admin-dashboard",
+    element: <AdminDashboadLayout></AdminDashboadLayout>,
+    children: [
+      {
+        path: "admin-dashboard",
+        element: "hello",
       },
     ],
   },
