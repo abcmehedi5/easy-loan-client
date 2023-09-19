@@ -63,20 +63,20 @@ const MyLoans = () => {
                   <td>
                     {loan.loanAmount.toFixed(2) <= 0
                       ? 0
-                      : loan.loanAmount.toFixed(2)}
+                      : loan.loanAmount.toFixed(2)} $
                   </td>
                   <td>{loan.date}</td>
                   <td>{loan.email}</td>
                   <td>
                     <button
                       disabled={loan.status == "pending"}
-                      className="btn btn-secondary"
+                      className="btn btn-info"
                     >
                       <Link to={"/scheduled/" + loan._id}>check scheduled</Link>
                     </button>
                   </td>
                   <td
-                    className={`font-bold  ${
+                    className={`font-bold  uppercase ${
                       loan.status == "pending"
                         ? "bg-red-300  border-red-600 "
                         : "bg-green-200 "

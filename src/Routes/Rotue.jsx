@@ -9,6 +9,8 @@ import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
 import AdminDashboadLayout from "../Layouts/AdminDashboadLayout";
 import ManageLoans from "../Pages/Admin-Dashboard/ManageLoans/ManageLoans";
+import PrivateRouter from "./PrivateRouter";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -29,15 +31,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/loan-request",
-        element: <LoanRequest></LoanRequest>,
+        element: (
+          <PrivateRouter>
+            <LoanRequest></LoanRequest>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/my-loans",
-        element: <MyLoans></MyLoans>,
+        element: (
+          <PrivateRouter>
+            <MyLoans></MyLoans>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/scheduled/:id",
-        element: <LoanScheduleds></LoanScheduleds>,
+        element: (
+          <PrivateRouter>
+            <LoanScheduleds></LoanScheduleds>
+          </PrivateRouter>
+        ),
       },
     ],
   },
@@ -50,7 +64,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin-dashboard/manage-loans",
-        element: <ManageLoans></ManageLoans>,
+        element:<AdminRoute> <ManageLoans></ManageLoans></AdminRoute>,
       },
     ],
   },
