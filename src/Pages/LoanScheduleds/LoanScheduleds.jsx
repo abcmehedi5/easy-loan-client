@@ -55,7 +55,7 @@ const LoanScheduleds = () => {
   const paymentDateObject = new Date(paymentDate);
   // Calculate the date 7 days after paymentDate
   const sevenDaysLater = new Date(paymentDateObject);
-  sevenDaysLater.setDate(paymentDateObject.getDate()+7);
+  sevenDaysLater.setDate(paymentDateObject.getDate() + 7);
 
   // Calculate the date 14 days after paymentDate
   const fourteenDaysLater = new Date(paymentDateObject);
@@ -80,22 +80,25 @@ const LoanScheduleds = () => {
   console.log(isDaySeven);
   //  date calculation -------------------------------------------end
 
-  console.log(isDaySeven);
+  console.log(sevenDaysLater);
 
   return (
     <div>
       {!paid && (
-        <div className=" shadow-xl grid grid-cols-3 gap-7 m-4">
+        <div className=" shadow-xl grid md:grid-cols-3 grid-cols-1 gap-7 m-4">
           {/* first week payment */}
           <div
             className={` ${
-              isThirdPaid && isDaySeven ? "opacity-100" : "opacity-50"
-            } card-body border bg-stone-300`}
+              isThirdPaid && isDaySeven ? "opacity-100" : "bg-red-100 border-red-400"
+            } card-body border bg-stone-300 relative`}
           >
+            <h1 className="stroke-orange-600 bg-orange-600 w-36 text-center p-2 rounded-sm absolute top-2 right-2">
+              {!isThirdPaid ? "Paid" : "Unpaid"}
+            </h1>
             <p>Md.Mehedi Hassan</p>
-            <h1 className="stroke-orange-600 bg-orange-600 w-36 text-center p-2 rounded-sm">{!isThirdPaid ? "Paid" : "Unpaid"}</h1>
-            <p>{todayLoan.toFixed(2)} $</p>
             <p>{loan.email}</p>
+            <h5>Payment date : {sevenDaysLater.toLocaleDateString("en-GB")}</h5>
+            <p>Amount: {todayLoan.toFixed(2)} $</p>
             <div className="card-actions justify-end">
               <button
                 disabled={!isThirdPaid || !isDaySeven}
