@@ -4,6 +4,7 @@ import Main from "../Layouts/Main";
 import Home from "../Pages/Home/Home/Home";
 import LoanRequest from "../Pages/LoanRequest/LoanRequest";
 import MyLoans from "../Pages/MyLoans/MyLoans";
+import LoanScheduleds from "../Pages/LoanScheduleds/LoanScheduleds";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/my-loans",
         element: <MyLoans></MyLoans>,
+      },
+      {
+        path: "/scheduled/:id",
+        element: <LoanScheduleds></LoanScheduleds>,
       },
     ],
   },

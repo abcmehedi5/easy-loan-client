@@ -8,16 +8,19 @@ const LoanRequest = () => {
     formState: { errors },
   } = useForm();
 
-  const todayDate = new Date();
-  const formattedDate = todayDate.toLocaleDateString("en-GB");
+  // const todayDate = new Date();
+  // const formattedDate = todayDate.toLocaleDateString("en-GB");
 
   const onSubmit = async (data) => {
     // create loan data object
     const loanRequest = {
       loanAmount: parseInt(data.loanAmount),
-      date: formattedDate,
+      // date: formattedDate,
+      date: new Date(),
       email: "abcmehedi5@gmail.com",
       status: "pending",
+      paid: false,
+      dividedLoan: 3,
     };
 
     // post loan data to server side

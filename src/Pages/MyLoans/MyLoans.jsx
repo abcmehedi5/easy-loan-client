@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 
 const MyLoans = () => {
   const {
@@ -42,7 +43,11 @@ const MyLoans = () => {
               <tr className="bg-slate-200">
                 <th>{index + 1}</th>
                 <td>Mehedi hassan</td>
-                <td>{loan.loanAmount}</td>
+                <td>
+                  {loan.loanAmount.toFixed(2) <= 0
+                    ? 0
+                    : loan.loanAmount.toFixed(2)}
+                </td>
                 <td>{loan.date}</td>
                 <td>{loan.email}</td>
                 <td>
@@ -50,7 +55,7 @@ const MyLoans = () => {
                     disabled={loan.status == "pending"}
                     className="btn btn-secondary"
                   >
-                    check scheduled
+                    <Link to={"/scheduled/" + loan._id}>check scheduled</Link>
                   </button>
                 </td>
                 <td
