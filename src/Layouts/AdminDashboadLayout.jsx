@@ -1,5 +1,5 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FcHome, FcBusinessman } from "react-icons/fc";
+import { FcHome, FcBusinessman, FcMoneyTransfer } from "react-icons/fc";
 const AdminDashboadLayout = () => {
   return (
     <div className="drawer lg:drawer-open ">
@@ -25,6 +25,25 @@ const AdminDashboadLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="w-64 bg-gradient-to-b h-screen text-black bg-gray-100 ">
+          <li className="px-5 py-1 hover::bg-[#DDF4FF] transition duration-300 pt-5">
+            <NavLink
+              to="/admin-dashboard/manage-loans"
+              className="hover:text-green-600 flex gap-2 items-center"
+            >
+              <FcMoneyTransfer
+                style={{
+                  fontSize: "35px",
+                  background: "white",
+                  padding: "5px",
+                  borderRadius: "50%",
+                }}
+              />
+           Manage loans
+            </NavLink>
+          </li>
+
+
+
           <li className="px-5 py-1 hover::bg-[#DDF4FF] transition duration-300 pt-5">
             <NavLink
               to="/user-dashboard/profile"

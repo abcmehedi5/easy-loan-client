@@ -60,7 +60,7 @@ const [successAlert] = useToast()
             <Link to="/my-loans">My Loans</Link>
           </li>
           <li>
-            <Link>Service</Link>
+            <Link  to={"/admin-dashboard/manage-loans"}>Admin</Link>
           </li>
           <li>
             <Link>Contact</Link>

@@ -59,7 +59,7 @@ const MyLoans = () => {
               <tbody key={index}>
                 <tr className="bg-slate-200">
                   <th>{index + 1}</th>
-                  <td>Mehedi hassan</td>
+                  <td>{loan.name}</td>
                   <td>
                     {loan.loanAmount.toFixed(2) <= 0
                       ? 0
