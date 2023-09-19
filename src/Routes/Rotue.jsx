@@ -5,6 +5,8 @@ import Home from "../Pages/Home/Home/Home";
 import LoanRequest from "../Pages/LoanRequest/LoanRequest";
 import MyLoans from "../Pages/MyLoans/MyLoans";
 import LoanScheduleds from "../Pages/LoanScheduleds/LoanScheduleds";
+import Login from "../Pages/Login/Login";
+import Register from "../Pages/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +16,14 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
       {
         path: "/loan-request",

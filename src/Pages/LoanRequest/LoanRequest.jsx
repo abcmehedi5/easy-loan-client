@@ -1,5 +1,8 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../Providers/AuthProvider";
+import useToast from "../../Hooks/useToast";
 const LoanRequest = () => {
   const {
     register,
@@ -8,18 +11,16 @@ const LoanRequest = () => {
     formState: { errors },
   } = useForm();
 
-  // const todayDate = new Date();
-  // const formattedDate = todayDate.toLocaleDateString("en-GB");
-
+  const { user } = useContext(AuthContext);
+  const [successAlert, errorAlert] = useToast();
   const onSubmit = async (data) => {
     // create loan data object
     const loanRequest = {
       loanAmount: parseInt(data.loanAmount),
-      // date: formattedDate,
       date: new Date(),
-      email: "abcmehedi5@gmail.com",
+      email: user.email,
+      name: user.displayName,
       status: "pending",
-      paid: false,
       dividedLoan: 3,
     };
 
@@ -29,7 +30,7 @@ const LoanRequest = () => {
         "http://localhost:5000/loans/loan",
         loanRequest
       );
-      alert(res.data.message);
+      successAlert(res.data.message);
       reset(); // reset from
     } catch (error) {
       console.log(error);
