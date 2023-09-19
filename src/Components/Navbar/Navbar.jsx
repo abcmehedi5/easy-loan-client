@@ -2,15 +2,18 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
 import useToast from "../../Hooks/useToast";
+import useAdmin from "../../Hooks/useAdmin";
 const Navbar = () => {
-  const {user, logOut} = useContext(AuthContext)
-const [successAlert] = useToast()
+  const { user, logOut } = useContext(AuthContext);
+  const [successAlert] = useToast();
   //  logout user
-  const handleLogout = () =>{
-    logOut().then(() =>{
-      successAlert("logout successfull")
-    })
-  }
+  const handleLogout = () => {
+    logOut().then(() => {
+      successAlert("logout successfull");
+    });
+  };
+
+  const [isAdmin] = useAdmin();
   return (
     <div className="navbar bg-base-200">
       <div className="navbar-start">
@@ -35,15 +38,30 @@ const [successAlert] = useToast()
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            <ul className="menu menu-horizontal px-1">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/loan-request">Loan Request</Link>
+              </li>
+              <li>
+                <Link to="/my-loans">My Loans</Link>
+              </li>
+              {isAdmin && (
+                <li>
+                  <Link to={"/admin-dashboard/manage-loans"}>Admin</Link>
+                </li>
+              )}
+              <li>
+                <Link>Contact</Link>
+              </li>
+              {!user && (
+                <li>
+                  <Link to={"/login"}>Login</Link>
+                </li>
+              )}
+            </ul>
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-xl">EASY-LOAN</a>
@@ -59,18 +77,34 @@ const [successAlert] = useToast()
           <li>
             <Link to="/my-loans">My Loans</Link>
           </li>
-          <li>
-            <Link  to={"/admin-dashboard/manage-loans"}>Admin</Link>
-          </li>
+          {isAdmin && (
+            <li>
+              <Link to={"/admin-dashboard/manage-loans"}>Admin</Link>
+            </li>
+          )}
           <li>
             <Link>Contact</Link>
           </li>
+          {!user && (
+            <li>
+              <Link to={"/login"}>Login</Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Login</a>
-       <button onClick={() => handleLogout()} className="btn">Logout</button>
-        <h1>{user?.email}</h1>
+        {user && (
+          <div className="flex justify-center items-center">
+            <img
+              className="w-10 h-10 rounded-full mx-6"
+              src={user.photoURL}
+              alt=""
+            />
+            <button onClick={() => handleLogout()} className="btn btn-info">
+              Logout
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
