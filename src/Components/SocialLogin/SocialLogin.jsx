@@ -23,7 +23,7 @@ const SocialLogin = () => {
           image: loggedInUser.photoURL,
         };
         console.log(loggedInUser);
-        axios.post("http://localhost:5000/users/user", saveUser).then((result) => {
+        axios.post("https://easy-loan-server-abcmehedi5.vercel.app/users/user", saveUser).then((result) => {
           navigate(from, { replace: true });
           // successAlert("account create successfull");
         });

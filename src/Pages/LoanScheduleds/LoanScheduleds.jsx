@@ -8,8 +8,8 @@ import LazyLoader from "../../Components/LazyLoader/LazyLoader";
 const LoanScheduleds = () => {
   const [repayment, setRepayment] = useState("");
   const [loading, setLoading] = useState(false);
-  const { id } = useParams();
   const [successAlert, errorAlert] = useToast();
+  const { id } = useParams();
   const {
     data: loan = {},
     isLoading,
@@ -18,7 +18,7 @@ const LoanScheduleds = () => {
     queryKey: ["loan"],
     queryFn: async () => {
       const res = await axios.get(
-        "http://localhost:5000/loans/loan-scheduled/" + id
+        "https://easy-loan-server-abcmehedi5.vercel.app/loans/loan-scheduled/" + id
       );
       return res.data;
     },
@@ -35,7 +35,7 @@ const LoanScheduleds = () => {
     if (repayment >= todayLoan.toFixed(2)) {
       try {
         const res = await axios.patch(
-          "http://localhost:5000/loans/repayment/" + loan._id,
+          "https://easy-loan-server-abcmehedi5.vercel.app/loans/repayment/" + loan._id,
           { loanAmount: repayment }
         );
         const result = await res.data;
@@ -70,11 +70,11 @@ const LoanScheduleds = () => {
   sevenDaysLater.setDate(paymentDateObject.getDate());
   // Calculate the date 14 days after paymentDate
   const fourteenDaysLater = new Date(paymentDateObject);
-  fourteenDaysLater.setDate(paymentDateObject.getDate());
+  fourteenDaysLater.setDate(paymentDateObject.getDate() + 14);
 
   // Calculate the date 21 days after paymentDate
   const twentyoneDaysLater = new Date(paymentDateObject);
-  twentyoneDaysLater.setDate(paymentDateObject.getDate());
+  twentyoneDaysLater.setDate(paymentDateObject.getDate() + 21);
 
   const todayDate = new Date();
   const isDaySeven = sevenDaysLater <= todayDate;
@@ -202,12 +202,14 @@ const LoanScheduleds = () => {
       <div>
         <div className="modal" id="my_modal_8">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">{todayLoan.toFixed(2)} $</h3>
+            <h3 className="font-bold text-lg mb-5">
+              Total amount: {todayLoan.toFixed(2)} $
+            </h3>
             <form>
               <input
-                type="text"
+                type="number"
                 placeholder="Amount here"
-                defaultValue={todayLoan.toFixed(2)}
+                // defaultValue={todayLoan.toFixed(2)}
                 onChange={(e) => setRepayment(e.target.value)}
                 className="input input-bordered  w-full "
               />

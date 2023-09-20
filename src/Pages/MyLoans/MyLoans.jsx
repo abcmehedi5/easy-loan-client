@@ -19,7 +19,7 @@ const MyLoans = () => {
     queryKey: ["loans"],
     queryFn: async () => {
       const res = await axios.get(
-        `http://localhost:5000/loans/loan?email=${user?.email}`
+        `https://easy-loan-server-abcmehedi5.vercel.app/loans/loan?email=${user?.email}`
       );
       return res.data;
     },

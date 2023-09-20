@@ -29,7 +29,7 @@ const LoanRequest = () => {
     // post loan data to server side
     try {
       const res = await axios.post(
-        "http://localhost:5000/loans/loan",
+        "https://easy-loan-server-abcmehedi5.vercel.app/loans/loan",
         loanRequest
       );
       successAlert(res.data.message);

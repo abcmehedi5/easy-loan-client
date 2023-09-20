@@ -18,7 +18,7 @@ const ManageLoans = () => {
   } = useQuery({
     queryKey: ["loans"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:5000/loans/loan-all");
+      const res = await axios.get("https://easy-loan-server-abcmehedi5.vercel.app/loans/loan-all");
       return res.data;
     },
   });
@@ -35,7 +35,7 @@ const ManageLoans = () => {
   const handleStatusChange = async (newStatus, loanId) => {
     // Send a PUT or PATCH request to your API to update the status
     try {
-      await axios.put(`http://localhost:5000/loans/loans-status/${loanId}`, {
+      await axios.put(`https://easy-loan-server-abcmehedi5.vercel.app/loans/loans-status/${loanId}`, {
         status: newStatus,
       });
       successAlert("Loan status updated successfully");

@@ -73,7 +73,7 @@ const Register = () => {
                 image: photoURL,
                 role: "user",
               };
-              axios.post("http://localhost:5000/users/user", saveUser).then((result) => {
+              axios.post("https://easy-loan-server-abcmehedi5.vercel.app/users/user", saveUser).then((result) => {
                 successAlert("account create successfull");
                 navigate("/");
                 setLoading(false);
