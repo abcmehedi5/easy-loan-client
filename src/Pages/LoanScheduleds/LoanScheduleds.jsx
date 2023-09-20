@@ -18,7 +18,8 @@ const LoanScheduleds = () => {
     queryKey: ["loan"],
     queryFn: async () => {
       const res = await axios.get(
-        "https://easy-loan-server-abcmehedi5.vercel.app/loans/loan-scheduled/" + id
+        "https://easy-loan-server-abcmehedi5.vercel.app/loans/loan-scheduled/" +
+          id
       );
       return res.data;
     },
@@ -35,7 +36,8 @@ const LoanScheduleds = () => {
     if (repayment >= todayLoan.toFixed(2)) {
       try {
         const res = await axios.patch(
-          "https://easy-loan-server-abcmehedi5.vercel.app/loans/repayment/" + loan._id,
+          "https://easy-loan-server-abcmehedi5.vercel.app/loans/repayment/" +
+            loan._id,
           { loanAmount: repayment }
         );
         const result = await res.data;
@@ -67,7 +69,7 @@ const LoanScheduleds = () => {
   const paymentDateObject = new Date(paymentDate);
   // Calculate the date 7 days after paymentDate
   const sevenDaysLater = new Date(paymentDateObject);
-  sevenDaysLater.setDate(paymentDateObject.getDate());
+  sevenDaysLater.setDate(paymentDateObject.getDate() + 7);
   // Calculate the date 14 days after paymentDate
   const fourteenDaysLater = new Date(paymentDateObject);
   fourteenDaysLater.setDate(paymentDateObject.getDate() + 14);
