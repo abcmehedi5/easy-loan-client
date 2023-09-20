@@ -2,10 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import useToast from "../../Hooks/useToast";
+import LazyLoader from "../../Components/LazyLoader/LazyLoader";
 
 const LoanScheduleds = () => {
   const [repayment, setRepayment] = useState("");
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
+  const [successAlert, errorAlert] = useToast();
   const {
     data: loan = {},
     isLoading,
@@ -19,8 +23,15 @@ const LoanScheduleds = () => {
       return res.data;
     },
   });
+
+  //  loading check
+  if (isLoading) {
+    return <LazyLoader></LazyLoader>;
+  }
+
   //  handle repayment
   const handleRepayment = async () => {
+    setLoading(ture);
     if (repayment >= todayLoan.toFixed(2)) {
       try {
         const res = await axios.patch(
@@ -28,10 +39,12 @@ const LoanScheduleds = () => {
           { loanAmount: repayment }
         );
         const result = await res.data;
-        alert(result.message);
+        setLoading(false);
+        successAlert(result.message);
         refetch();
       } catch (error) {
-        alert("payment worng");
+        setLoading(false);
+        errorAlert("payment couldn't submit. please try again");
       }
     } else {
       alert("please valid amount in input filed");
@@ -43,7 +56,6 @@ const LoanScheduleds = () => {
 
   //  date calculation -------------------------------------------start
   const paymentDate = loan.date; //2023-09-19T15:35:02.276Z
-
   //   check paid payment
   const paid = dividedLoan == 0;
   const isFirstPaid = dividedLoan == 1;
@@ -54,27 +66,14 @@ const LoanScheduleds = () => {
   const paymentDateObject = new Date(paymentDate);
   // Calculate the date 7 days after paymentDate
   const sevenDaysLater = new Date(paymentDateObject);
-  sevenDaysLater.setDate(paymentDateObject.getDate() + 7);
+  sevenDaysLater.setDate(paymentDateObject.getDate());
   // Calculate the date 14 days after paymentDate
   const fourteenDaysLater = new Date(paymentDateObject);
-  fourteenDaysLater.setDate(paymentDateObject.getDate()+14 );
+  fourteenDaysLater.setDate(paymentDateObject.getDate() + 14);
 
   // Calculate the date 21 days after paymentDate
   const twentyoneDaysLater = new Date(paymentDateObject);
-  twentyoneDaysLater.setDate(paymentDateObject.getDate() +21);
-  // console.log("date: ", fourteenDaysLater);
-  // check date in today
-
-  // current date
-  //   const todayDate = new Date();
-  //   const todayFormateDate = todayDate.toLocaleDateString("en-GB");
-  // console.log(new Date(todayDate));
-  //   const isDaySeven =
-  //     sevenDaysLater.toLocaleDateString("en-GB") <= todayFormateDate;
-  //   const isFourteenDaysLater =
-  //     fourteenDaysLater.toLocaleDateString("en-GB") <= todayFormateDate; //04/10/2023 <= 20/9/2023
-  //   const istwentyoneDaysLater =
-  //     twentyoneDaysLater.toLocaleDateString("en-GB") <= todayFormateDate;
+  twentyoneDaysLater.setDate(paymentDateObject.getDate() + 21);
 
   const todayDate = new Date();
   const isDaySeven = sevenDaysLater <= todayDate;
@@ -134,9 +133,7 @@ const LoanScheduleds = () => {
           >
             <h1
               className={`${
-                isFirstPaid
-                  ? "stroke-green-600 bg-green-200"
-                  : "  bg-red-300"
+                isFirstPaid ? "stroke-green-600 bg-green-200" : "  bg-red-300"
               } text-white w-36 text-center p-2 rounded-sm absolute top-2 right-2`}
             >
               {isFirstPaid ? "Paid" : "Unpaid"}
@@ -215,9 +212,12 @@ const LoanScheduleds = () => {
             <div className="modal-action">
               <button
                 onClick={() => handleRepayment()}
-                className="btn btn-secondary"
+                className="btn btn-info"
               >
                 Submit
+                {loading && (
+                  <span className="loading loading-spinner loading-md"></span>
+                )}
               </button>
               <a href="#" className="btn">
                 Cancel

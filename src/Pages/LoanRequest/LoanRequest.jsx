@@ -99,7 +99,7 @@ const LoanRequest = () => {
             type="submit"
             className="w-full flex justify-center gap-5 bg-blue-500 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           >
-            LOAN REQUEST{" "}
+            LOAN REQUEST
             {loading && (
               <span className="loading loading-spinner loading-md"></span>
             )}
