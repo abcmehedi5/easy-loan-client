@@ -19,7 +19,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: (
+          <PrivateRouter>
+            {" "}
+            <Home></Home>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/login",
@@ -64,7 +69,12 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/admin-dashboard/manage-loans",
-        element:<AdminRoute> <ManageLoans></ManageLoans></AdminRoute>,
+        element: (
+          <AdminRoute>
+            {" "}
+            <ManageLoans></ManageLoans>
+          </AdminRoute>
+        ),
       },
     ],
   },

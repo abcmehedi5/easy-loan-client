@@ -36,7 +36,7 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="max-w-md w-full px-6 py-8 bg-white shadow-lg rounded-lg">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-5">
-          Login
+          Login Easy Loan
         </h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
