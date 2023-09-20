@@ -46,7 +46,7 @@ const LoanRequest = () => {
       <div className="p-20">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white shadow-2xl border-2 rounded-lg p-6 w-2/4 mx-auto"
+          className="bg-white shadow-2xl border-2 rounded-lg md:p-6 p-2 md:w-2/4 w-full mx-auto"
         >
           <h2 className="text-2xl font-semibold mb-4 text-center">
             Loan Application
