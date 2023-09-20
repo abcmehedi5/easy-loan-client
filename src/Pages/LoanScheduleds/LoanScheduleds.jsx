@@ -31,7 +31,7 @@ const LoanScheduleds = () => {
 
   //  handle repayment
   const handleRepayment = async () => {
-    setLoading(ture);
+    setLoading(true);
     if (repayment >= todayLoan.toFixed(2)) {
       try {
         const res = await axios.patch(
@@ -47,7 +47,8 @@ const LoanScheduleds = () => {
         errorAlert("payment couldn't submit. please try again");
       }
     } else {
-      alert("please valid amount in input filed");
+      errorAlert("please valid amount in input filed");
+      setLoading(false);
     }
   };
   //   diveded amount
@@ -69,11 +70,11 @@ const LoanScheduleds = () => {
   sevenDaysLater.setDate(paymentDateObject.getDate());
   // Calculate the date 14 days after paymentDate
   const fourteenDaysLater = new Date(paymentDateObject);
-  fourteenDaysLater.setDate(paymentDateObject.getDate() + 14);
+  fourteenDaysLater.setDate(paymentDateObject.getDate());
 
   // Calculate the date 21 days after paymentDate
   const twentyoneDaysLater = new Date(paymentDateObject);
-  twentyoneDaysLater.setDate(paymentDateObject.getDate() + 21);
+  twentyoneDaysLater.setDate(paymentDateObject.getDate());
 
   const todayDate = new Date();
   const isDaySeven = sevenDaysLater <= todayDate;
@@ -189,8 +190,10 @@ const LoanScheduleds = () => {
       )}
 
       {paid && (
-        <div className="card-body border bg-stone-300">
-          <h1 className="text-center">Your loan is paid </h1>
+        <div className="card-body border h-screen flex items-center justify-center  ">
+          <h1 className="text-center  text-3xl font-bold text-red-600  ">
+            Your loan is paid !
+          </h1>
         </div>
       )}
 
