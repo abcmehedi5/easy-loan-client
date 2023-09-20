@@ -38,30 +38,26 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
-            <ul className="menu menu-horizontal px-1 ">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/loan-request">Loan Request</Link>
+            </li>
+            <li>
+              <Link to="/my-loans">My Loans</Link>
+            </li>
+            {isAdmin && (
               <li>
-                <Link to="/">Home</Link>
+                <Link to={"/admin-dashboard/manage-loans"}>Admin</Link>
               </li>
+            )}
+
+            {!user && (
               <li>
-                <Link to="/loan-request">Loan Request</Link>
+                <Link to={"/login"}>Login</Link>
               </li>
-              <li>
-                <Link to="/my-loans">My Loans</Link>
-              </li>
-              {isAdmin && (
-                <li>
-                  <Link to={"/admin-dashboard/manage-loans"}>Admin</Link>
-                </li>
-              )}
-              <li>
-                <Link>Contact</Link>
-              </li>
-              {!user && (
-                <li>
-                  <Link to={"/login"}>Login</Link>
-                </li>
-              )}
-            </ul>
+            )}
           </ul>
         </div>
         <a className="btn btn-ghost normal-case text-xl">EASY-LOAN</a>
@@ -82,9 +78,7 @@ const Navbar = () => {
               <Link to={"/admin-dashboard/manage-loans"}>Admin</Link>
             </li>
           )}
-          <li>
-            <Link>Contact</Link>
-          </li>
+
           {!user && (
             <li>
               <Link to={"/login"}>Login</Link>
